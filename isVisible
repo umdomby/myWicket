@@ -1,4 +1,61 @@
+https://stackoverflow.com/questions/19355983/ajax-link-change-visibility-with-setvisible-in-onclick-method
+
+public class MyPanel extends Panel{
+
+   private boolean showLinkA = true;
+   AjaxLink aLink;
+   AjaxLink bLink;
+
+   public MyPanel(String id) {
+      super(id);
+      add(aLink = aLink());
+      add(bLink = bLink());
+   }
+
+   private AjaxLink aLink() {
+      AjaxLink al = new AjaxLink("aLink") {
+
+         @Override
+         protected void onConfigure() {
+            super.onConfigure();
+            setVisible(showLinkA);
+         }
+
+         @Override
+         public void onClick(AjaxRequestTarget target) {
+            showLinkA = false;
+            target.add(aLink, bLink);
+         }
+      };
+      al.setOutputMarkupPlaceholderTag(true);
+      return al;
+   }
+
+   private AjaxLink bLink() {
+      AjaxLink bl = new AjaxLink("aLink") {
+
+         @Override
+         protected void onConfigure() {
+            super.onConfigure();
+            setVisible(!showLinkA);
+         }
+
+         @Override
+         public void onClick(AjaxRequestTarget target) {
+            showLinkA = true;
+            target.add(aLink, bLink);
+         }
+      };
+      bl.setOutputMarkupPlaceholderTag(true);
+      return bl;
+   }
+
+}
+
+
+
 https://www.codota.com/code/java/methods/org.apache.wicket.ajax.markup.html.AjaxLink/isVisible
+
 
 private void checkState() {
   choices = getChoices();
