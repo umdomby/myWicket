@@ -1,0 +1,25 @@
+https://www.codota.com/code/java/methods/org.apache.wicket.ajax.markup.html.AjaxLink/isVisible
+
+private void checkState() {
+  choices = getChoices();
+  boolean set = choices != null && !choices.isEmpty();
+  if (addLink.isVisible() != set) {
+    addLink.setVisible(set);
+  }
+  if (addContainerLink.isVisible() != set) {
+    addContainerLink.setVisible(set);
+  }
+}
+
+
+private void checkState() {
+  choices = getChoices();
+  boolean set = choices != null && choices.size() > 0;
+  if (addLink.isVisible() != set) {
+    addLink.setVisible(set);
+    IRequestTarget target = RequestCycle.get().getRequestTarget();
+    if (target instanceof AjaxRequestTarget) {
+      ((AjaxRequestTarget) target).addComponent(addLink);
+    }
+  }
+}
