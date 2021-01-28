@@ -1,0 +1,12 @@
+                 <div wicket:id="checkContainer"><span wicket:id="eripCheck"></span></div>
+                
+                WebMarkupContainer checkContainer = new WebMarkupContainer("checkContainer");
+                item.add(checkContainer);
+                if (dto.getStatus().equals(TopupStatusEnum.REDEEM_DONE)) {
+                    checkContainer.add(new EripTopupCheckLink("eripCheck", new EripTopupEntityModel(dto)));
+                } else {
+                    checkContainer.add(new Label("eripCheck", ""));
+                }
+                
+                
+                
